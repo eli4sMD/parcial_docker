@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Animal en Wikipedia</title>
+</head>
+<body>
+    <h1>Buscar Información de Animales en Wikipedia</h1>
+    <form id="searchForm">
+        <input type="text" id="animalNombre" placeholder="Ingrese el nombre del animal">
+        <button type="submit">Buscar</button>
+    </form>
+    <div id="resultado">
+        <h2>Descripción del Animal:</h2>
+        <p id="descripcion"></p>
+        <img src="" alt="Imagen del Animal" id="imagen">
+    </div>
+    <script>
+        const searchForm = document.getElementById('searchForm');
+        const animalNombreInput = document.getElementById('animalNombre');
+        const descripcionElement = document.getElementById('descripcion');
+        const imagenElement = document.getElementById('imagen');
+
+        searchForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const animalNombre = animalNombreInput.value.trim();
+            if (animalNombre !== '') {
+                try {
+                    const response = await fetch(`/buscar-animal?nombre=${animalNombre}`);
+                    const data = await response.json();
+
+                    if (data.descripcion) {
+                        descripcionElement.textContent = data.descripcion;
+                    } else {
+                        descripcionElement.textContent = 'No se encontró información para el animal especificado.';
+                    }
+
+                    if (data.imagenUrl) {
+                        imagenElement.src = data.imagenUrl;
+                        imagenElement.style.display = 'block';
+                    } else {
+                        imagenElement.src = '';
+                        imagenElement.style.display = 'none';
+                    }
+                } catch (error) {
+                    console.error('Error al obtener datos', error);
+                    descripcionElement.textContent = 'Error al obtener información.';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
