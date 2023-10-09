@@ -4,8 +4,8 @@ Esta es una aplicación web que permite buscar información sobre animales en Wi
 
 ## Instrucciones para Ejecutar
 
-Siga estos pasos para ejecutar la aplicación en su entorno local:
-Es recomendable ejecutar npm i en la carpeta del proyecto antes de iniciar
+Siga estos pasos para ejecutar la aplicación en su entorno local (Es recomendable ejecutar npm i en la carpeta del proyecto antes de iniciar):
+
 ## Construye la imagen de Docker:
 
 ```bash
